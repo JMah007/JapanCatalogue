@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/favBtn"
+        android:id="@+id/addFavBtn"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginLeft="10dp"

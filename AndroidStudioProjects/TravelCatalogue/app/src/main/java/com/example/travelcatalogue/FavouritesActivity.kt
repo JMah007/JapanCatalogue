@@ -11,10 +11,20 @@ class FavouritesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_favourites)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val recyclerItemsFavourites = view.findViewById(R.id.recyclerItemsFavourites)
+
+        // Connect data on this line using adapter
+        recyclerItemsFavourites.layoutManager = LinearLayoutManager(this) // This just changes the way items are displayed
+
+
+        backBtn.setOnClickListener{
+            // Add implementation for going back to previous activity whether its main page or favourites
+            Toast.makeText(this, "Successfully went back!", Toast.LENGTH_SHORT).show()
         }
+
+        }
+
+
     }
 }

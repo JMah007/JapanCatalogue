@@ -11,10 +11,18 @@ class DetailedViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detailed_view)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+
+        addFavBtn.setOnClickListener{
+            // Add implementation for adding to the list of favourite catalogues.
+            // for now just show a popup text
+            Toast.makeText(this, "Added to favourites!", Toast.LENGTH_SHORT).show()
+
+        }
+
+        backBtn.setOnClickListener{
+            // Add implementation for going back to previous activity whether its main page or favourites
+            Toast.makeText(this, "Successfully went back!", Toast.LENGTH_SHORT).show()
         }
     }
 }
