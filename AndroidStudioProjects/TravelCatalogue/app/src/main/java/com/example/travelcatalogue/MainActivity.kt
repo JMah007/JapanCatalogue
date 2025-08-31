@@ -1,9 +1,10 @@
-package com.example.travelcatalogue
+package com.example.myapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.travelcatalogue.ItemListFragment
+import com.example.travelcatalogue.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,26 +12,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnHotels = findViewById<Button>(R.id.btnHotels)
-        val btnFood = findViewById<Button>(R.id.btnFood)
-        val btnAttractions = findViewById<Button>(R.id.btnAttractions)
+        findViewById<Button>(R.id.btnHotels).setOnClickListener { replaceFragment("Hotels") }
+        findViewById<Button>(R.id.btnFood).setOnClickListener { replaceFragment("Food") }
+        findViewById<Button>(R.id.btnAttractions).setOnClickListener { replaceFragment("Attractions") }
+    }
 
-        btnHotels.setOnClickListener {
-            val intent = Intent(this, CatalogueActivity::class.java)
-            intent.putExtra("CATEGORY", "Hotels")
-            startActivity(intent)
-        }
+    private fun replaceFragment(category: String) {
+        val fragment = ItemListFragment()
+        fragment.category = category
 
-        btnFood.setOnClickListener {
-            val intent = Intent(this, CatalogueActivity::class.java)
-            intent.putExtra("CATEGORY", "Food")
-            startActivity(intent)
-        }
-
-        btnAttractions.setOnClickListener {
-            val intent = Intent(this, CatalogueActivity::class.java)
-            intent.putExtra("CATEGORY", "Attractions")
-            startActivity(intent)
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
+
