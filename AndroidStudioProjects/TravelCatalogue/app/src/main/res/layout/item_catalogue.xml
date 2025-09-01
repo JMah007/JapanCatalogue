@@ -25,21 +25,12 @@ android:orientation="vertical">
 </TextView>
 
 <TextView
-    android:id="@+id/description"
+    android:id="@+id/type"
     android:textSize="15dp"
-    android:paddingTop="60dp"
-    android:text="Description"
+    android:paddingTop="15dp"
+    android:text="Type"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 </TextView>
-
-    <TextView
-        android:id="@+id/type"
-        android:textSize="15dp"
-        android:paddingTop="15dp"
-        android:text="Type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
 
 </LinearLayout>

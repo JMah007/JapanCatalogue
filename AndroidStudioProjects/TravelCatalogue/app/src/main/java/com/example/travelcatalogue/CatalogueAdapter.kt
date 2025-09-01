@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
-    private val context: Context
+    private val context: Context,
+    private val onItemClick: (CatalogueItems) -> Unit
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
     private var items: List<CatalogueItems> = emptyList()
@@ -35,8 +37,11 @@ class CatalogueAdapter(
         val item = items[position]
         holder.title.text = item.title
         holder.location.text = item.location
-        holder.description.text = item.description
         holder.type.text = item.type
+
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int = items.size

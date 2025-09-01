@@ -8,8 +8,9 @@ class CatalogueViewModel : ViewModel() {
 
     private val _hotels = MutableLiveData<List<CatalogueItems>>(
         listOf(
-            CatalogueItems("Niseko Ski Resort", "Hokkaido", "The most famous ski resort in all of Japan, known for having tons of light powder snow and is especially famous amongst Australians, who in recent decades have popularize the resort for skiing and snowboarding purposes.", null),
-            CatalogueItems("Four Seasons Marunouchi", "Tokyo", "Located in the heart of Tokyo, this hotel provides the highest level of service and comfortability to all its customer. Experience all kinds of luxury from relaxing high tea to drinking in a classy night bar to enjoying French cuisine in a 3-michelin star restaurant.", null)        )
+            CatalogueItems("Niseko Ski Resort", "Hokkaido", "The most famous ski resort in all of Japan, known for having tons of light powder snow and is especially famous amongst Australians, who in recent decades have popularize the resort for skiing and snowboarding purposes.", "5-stars"),
+            CatalogueItems("Four Seasons Marunouchi", "Tokyo", "Located in the heart of Tokyo, this hotel provides the highest level of service and comfortability to all its customer. Experience all kinds of luxury from relaxing high tea to drinking in a classy night bar to enjoying French cuisine in a 3-michelin star restaurant.", "5-stars")
+        )
     )
     private val _food = MutableLiveData<List<CatalogueItems>>(
         listOf(
