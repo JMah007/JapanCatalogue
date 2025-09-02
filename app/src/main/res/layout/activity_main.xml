@@ -1,22 +1,54 @@
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/homeImage"
         android:layout_width="match_parent"
         android:layout_height="260dp"
+        android:contentDescription="Home page background"
         android:src="@drawable/home_image"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/SearchBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:scaleType="centerInside"
+        android:src="@drawable/searchIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/homeImage"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/FavouritesListBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:scaleType="centerInside"
+        android:src="@drawable/filled_star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/homeImage"
+        app:tint="@color/white" />
 
     <LinearLayout
+        android:id="@+id/BtnCategoriesLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/homeImage">
+
 
         <Button
             android:id="@+id/btnHotels"
@@ -47,6 +79,7 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/BtnCategoriesLayout"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
