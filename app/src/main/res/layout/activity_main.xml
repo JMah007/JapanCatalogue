@@ -22,7 +22,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Back"
         android:scaleType="centerInside"
-        android:src="@drawable/searchIcon"
+        android:src="@drawable/search_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/homeImage"
         app:tint="@color/white" />
