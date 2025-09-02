@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
     private val context: Context,
-    private val onItemClick: (CatalogueItems) -> Unit
+    private val onItemClick: (CatalogueItem) -> Unit,
+    private val originalList: List<CatalogueItem>
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
-    private var items: List<CatalogueItems> = emptyList()
+    private var items: List<CatalogueItem> = originalList.toList()
 
-    fun updateItems(newItems: List<CatalogueItems>) {
+    fun updateItems(newItems: List<CatalogueItem>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -45,4 +45,13 @@ class CatalogueAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun filterByType(type: String) {
+        items = if (type == "All") {
+            originalList
+        } else {
+            originalList.filter { it.type.equals(type, ignoreCase = true) }
+        }
+        notifyDataSetChanged()
+    }
 }
