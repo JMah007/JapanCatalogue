@@ -1,20 +1,29 @@
 package com.example.travelcatalogue
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.travelcatalogue.ItemListFragment
+import com.example.travelcatalogue.R
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        findViewById<Button>(R.id.btnHotels).setOnClickListener { replaceFragment("Hotels") }
+        findViewById<Button>(R.id.btnFood).setOnClickListener { replaceFragment("Food") }
+        findViewById<Button>(R.id.btnAttractions).setOnClickListener { replaceFragment("Attractions") }
+    }
+
+    private fun replaceFragment(category: String) {
+        val fragment = ItemListFragment()
+        fragment.category = category
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
+

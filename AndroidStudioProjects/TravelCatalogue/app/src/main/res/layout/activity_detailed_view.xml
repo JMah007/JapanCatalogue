@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="260dp"
         android:scaleType="centerCrop"
         android:src="@drawable/home_image"
         app:layout_constraintTop_toTopOf="parent"
@@ -15,17 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/favBtn"
+        android:id="@+id/backBtn"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/back_button"
-        app:tint="@color/white"
+        android:contentDescription="Back"
         android:scaleType="centerInside"
-        app:layout_constraintTop_toTopOf="@id/backgroundImage"
+        android:src="@drawable/back_button"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="Back" />
+        app:layout_constraintTop_toTopOf="@id/backgroundImage"
+        app:tint="@color/white" />
 
     <LinearLayout
         android:id="@+id/contentContainer"
@@ -52,20 +53,21 @@
                 android:layout_height="wrap_content" />
 
             <ImageButton
-                android:id="@+id/backBtn"
+                android:id="@+id/favBtn"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="320dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/unfilled_star"
-                app:tint="@color/iconTint"
+                android:contentDescription="Favourite"
                 android:scaleType="centerInside"
-                android:contentDescription="Favourite" />
+                android:src="@drawable/unfilled_star"
+                app:tint="@color/iconTint" />
+
         </LinearLayout>
 
         <TextView
-            android:id="@+id/category"
-            android:text="Category Tag"
+            android:id="@+id/location"
+            android:text="Location"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -73,8 +75,8 @@
             android:layout_marginTop="4dp" />
 
         <TextView
-            android:id="@+id/textPhone"
-            android:text="Content Preview"
+            android:id="@+id/description"
+            android:text="Description"
             android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
