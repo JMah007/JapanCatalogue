@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 class CatalogueAdapter(
     private val context: Context,
     private val onItemClick: (CatalogueItem) -> Unit,
-    private val originalList: List<CatalogueItem>
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
-    private var items: List<CatalogueItem> = originalList.toList()
+    private var items: List<CatalogueItem> = emptyList()
 
     fun updateItems(newItems: List<CatalogueItem>) {
         items = newItems
@@ -45,13 +44,4 @@ class CatalogueAdapter(
     }
 
     override fun getItemCount(): Int = items.size
-
-    fun filterByType(type: String) {
-        items = if (type == "All") {
-            originalList
-        } else {
-            originalList.filter { it.type.equals(type, ignoreCase = true) }
-        }
-        notifyDataSetChanged()
-    }
 }
