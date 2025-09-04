@@ -17,13 +17,12 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
     private val vm: CatalogueViewModel by activityViewModels()
 
     var category: String? = null
-    private var allItems: List<CatalogueItem> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerItemsHome)
-        adapter = CatalogueAdapter(requireContext(), { item ->
+        adapter = CatalogueAdapter(requireContext()) { item ->
             val intent = Intent(requireContext(), DetailedViewActivity::class.java).apply {
                 putExtra("title", item.title)
                 putExtra("location", item.location)
@@ -32,51 +31,15 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
                 putExtra("isFavourite", false)
             }
             startActivity(intent)
-        }, emptyList())
-
+        }
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        val filterSpinner = view.findViewById<Spinner>(R.id.spinnerFilter)
-        val type = listOf("All", "Luxury", "Budget", "Family") // you can adjust
-        filterSpinner.adapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, type).apply {
-                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            }
-
-        filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedType = type[position]
-                applyFilter(selectedType)
-            }
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
         when (category) {
-            "Hotels" -> vm.hotels.observe(viewLifecycleOwner) {
-                allItems = it
-                applyFilter(filterSpinner.selectedItem.toString())
-            }
-
-            "Food" -> vm.food.observe(viewLifecycleOwner) {
-                allItems = it
-                applyFilter(filterSpinner.selectedItem.toString())
-            }
-
-            "Attractions" -> vm.attractions.observe(viewLifecycleOwner) {
-                allItems = it
-                applyFilter(filterSpinner.selectedItem.toString())
-            }
+            "Hotels" -> vm.hotels.observe(viewLifecycleOwner) {adapter.updateItems(it) }
+            "Food" -> vm.food.observe(viewLifecycleOwner) {adapter.updateItems(it) }
+            "Attractions" -> vm.attractions.observe(viewLifecycleOwner) {adapter.updateItems(it) }
         }
-    }
-
-    private fun applyFilter(type: String) {
-        val filtered = if (type == "All") {
-            allItems
-        } else {
-            allItems.filter { it.type == type }
-        }
-        adapter.updateItems(filtered)
     }
 }
 
