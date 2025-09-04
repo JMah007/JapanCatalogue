@@ -1,5 +1,6 @@
 package com.example.travelcatalogue
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -48,6 +49,8 @@ class DetailedViewActivity : AppCompatActivity() {
             favBtn.setImageResource(
                 if (isFavourite) R.drawable.filled_star else R.drawable.unfilled_star
             )
+
+            // logic goes here for adding it to favourites
         }
     }
 }
