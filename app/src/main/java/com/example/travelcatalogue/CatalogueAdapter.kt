@@ -23,7 +23,7 @@ class CatalogueAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val location: TextView = view.findViewById(R.id.location)
-        val type: TextView = view.findViewById(R.id.type)
+        val description: TextView = view.findViewById(R.id.description)
        // val type: TextView = view.findViewById(R.id.type)
     }
 
@@ -37,7 +37,7 @@ class CatalogueAdapter(
         val item = items[position]
         holder.title.text = item.title
         holder.location.text = item.location
-        holder.type.text = item.type
+        holder.description.text = item.description
 
 
 //        holder.itemView.setOnClickListener {
