@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
     private val context: Context,
-    private val onItemClick: (CatalogueItem) -> Unit,
+    //private val onItemClick: (CatalogueItem) -> Unit,
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
     private var items: List<CatalogueItem> = emptyList()
+
 
     fun updateItems(newItems: List<CatalogueItem>) {
         items = newItems
@@ -22,8 +23,8 @@ class CatalogueAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
         val location: TextView = view.findViewById(R.id.location)
-        val description: TextView = view.findViewById(R.id.description)
         val type: TextView = view.findViewById(R.id.type)
+       // val type: TextView = view.findViewById(R.id.type)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,9 +39,10 @@ class CatalogueAdapter(
         holder.location.text = item.location
         holder.type.text = item.type
 
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
-        }
+
+//        holder.itemView.setOnClickListener {
+//            onItemClick(item)
+//        }
     }
 
     override fun getItemCount(): Int = items.size
