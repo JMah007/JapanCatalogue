@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
     private val context: Context,
-    //private val onItemClick: (CatalogueItem) -> Unit,
+    private val onItemClick: (CatalogueItem) -> Unit,
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
     private var items: List<CatalogueItem> = emptyList()
@@ -39,10 +39,9 @@ class CatalogueAdapter(
         holder.location.text = item.location
         holder.description.text = item.description
 
-
-//        holder.itemView.setOnClickListener {
-//            onItemClick(item)
-//        }
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int = items.size

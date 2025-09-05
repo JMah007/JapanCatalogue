@@ -22,42 +22,43 @@ class MainActivity : AppCompatActivity() {
         val attractionsBtn = findViewById<Button>(R.id.btnAttractions)
 
 
-//        fun replaceFragment(category: String) {
-//            val fragment = ItemListFragment()
-//            fragment.category = category
-//
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainer, fragment)
-//                .commit()
-//        }
-
-
-        // Show hotels only to make sure adapter and view and binding works in general
-        if (savedInstanceState == null){
-            /* Line below using "apply" is from chatgpt and seems to prevent the startup screen from crashing.
-            * This replaces the original assignment of fragment.category = "Hotels"
-             */
-//            val fragment = ItemListFragment().apply {
-//                arguments = bundleOf("category" to "Hotels")
-//            }
+        /*
+        * This method helps to initialise a new fragment with a new category list
+         */
+        fun replaceFragment(category: String) {
+            val fragment = ItemListFragment()
+            val bundle = Bundle()
+            bundle.putString("category", category)
+            fragment.arguments = bundle
 
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, ItemListFragment()) // temporarily removed passing category as string into ItemListFragmnet as its hardcoded as hotels for now
+                .replace(R.id.fragmentContainer, fragment)
                 .commit()
         }
 
-        // Interaction with the category buttons
+        //Beginning of the program setting Hotels as the default list to show
+        if (savedInstanceState == null){
+            val fragment = ItemListFragment()
+            val bundle = Bundle()
+            bundle.putString("category", "Hotels")
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit()
+        }
+
         hotelsBtn.setOnClickListener {
-            //replaceFragment("Hotels")
-            Toast.makeText(this, "Displaying Hotels", Toast.LENGTH_SHORT).show()
+            replaceFragment("Hotels")
+
         }
         foodBtn.setOnClickListener {
-            //replaceFragment("Food")
-            Toast.makeText(this, "Displaying Food", Toast.LENGTH_SHORT).show()
+            replaceFragment("Food")
+
         }
         attractionsBtn.setOnClickListener {
-            //replaceFragment("Attractions")
-            Toast.makeText(this, "Displaying Attractions", Toast.LENGTH_SHORT).show()
+            replaceFragment("Attractions")
+
         }
 
         favouritesListBtn.setOnClickListener{
