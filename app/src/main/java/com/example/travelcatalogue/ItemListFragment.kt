@@ -17,7 +17,12 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
     private val vm: CatalogueViewModel by activityViewModels()
     private lateinit var adapter: CatalogueAdapter
 
-    //var category: String? = null // temporarily not using as hotels is hardcoded as the displayed list
+    private lateinit var category: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        category = requireArguments().getString("category") ?: "Hotels" // if no category is provided then fallback to Hotels
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,21 +45,13 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        // Temporarily disabled as hotels is the hardcoded list
-//        when (category) {
-//            "Hotels" -> vm.hotels.observe(viewLifecycleOwner) {adapter.updateItems(it) }
-//            "Food" -> vm.food.observe(viewLifecycleOwner) {adapter.updateItems(it) }
-//            "Attractions" -> vm.attractions.observe(viewLifecycleOwner) {adapter.updateItems(it) }
-//        }
 
-
-        //experimenting showing hotels only for now by hardcoding it
-        /*
-        * This method observes if changes are made to hotels list in ViewModel. If so then it automatically updates the new list to be displayed
-         */
-        vm.hotels.observe(viewLifecycleOwner) { items ->
-            adapter.updateItems(items)
+        when (category) {
+            "Hotels" -> vm.hotels.observe(viewLifecycleOwner) {adapter.updateItems(it) }
+            "Food" -> vm.food.observe(viewLifecycleOwner) {adapter.updateItems(it) }
+            "Attractions" -> vm.attractions.observe(viewLifecycleOwner) {adapter.updateItems(it) }
         }
+
     }
 }
 

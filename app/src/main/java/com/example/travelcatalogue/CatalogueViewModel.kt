@@ -52,4 +52,5 @@ class CatalogueViewModel : ViewModel() {
     val hotels: LiveData<List<CatalogueItem>> = _hotels
     val food: LiveData<List<CatalogueItem>> = _food
     val attractions: LiveData<List<CatalogueItem>> = _attractions
+
 }
