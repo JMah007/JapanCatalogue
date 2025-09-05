@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelcatalogue.R
@@ -45,12 +46,23 @@ class DetailedViewActivity : AppCompatActivity() {
         }
 
         favBtn.setOnClickListener {
-            isFavourite = !isFavourite
-            favBtn.setImageResource(
-                if (isFavourite) R.drawable.filled_star else R.drawable.unfilled_star
-            )
+            if (isFavourite){
+                isFavourite = false
+                favBtn.setImageResource(
+                    R.drawable.unfilled_star
+                )
+                Toast.makeText(this, "Removed from favourites", Toast.LENGTH_SHORT).show()
 
-            // logic goes here for adding it to favourites
+            }
+            else{
+                isFavourite = true
+                Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show()
+                favBtn.setImageResource(
+                    R.drawable.filled_star
+                )
+            }
         }
+
+
     }
 }

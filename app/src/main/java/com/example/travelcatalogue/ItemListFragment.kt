@@ -28,19 +28,19 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerItemsHome)
-        adapter = CatalogueAdapter(requireContext())
+        //adapter = CatalogueAdapter(requireContext())
 
-        // Temporarily disabled function to select a item in the recycler list on main page
-//        adapter = CatalogueAdapter(requireContext()) { item ->
-//            val intent = Intent(requireContext(), DetailedViewActivity::class.java).apply {
-//                putExtra("title", item.title)
-//                putExtra("location", item.location)
-//                putExtra("description", item.description)
-//                putExtra("imageResId", item.imageResId)
-//                putExtra("isFavourite", false)
-//            }
-//            startActivity(intent)
-//        }
+
+        adapter = CatalogueAdapter(requireContext()) { item ->
+            val intent = Intent(requireContext(), DetailedViewActivity::class.java).apply {
+                putExtra("title", item.title)
+                putExtra("location", item.location)
+                putExtra("description", item.description)
+                putExtra("imageResId", item.imageResId)
+                putExtra("isFavourite", false)
+            }
+            startActivity(intent)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
