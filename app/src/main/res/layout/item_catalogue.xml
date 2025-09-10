@@ -17,7 +17,7 @@
 </TextView>
 
 <TextView
-    android:id="@+id/location"
+    android:id="@+id/type"
     android:textSize="15dp"
     android:paddingTop="5dp"
     android:text="Location"

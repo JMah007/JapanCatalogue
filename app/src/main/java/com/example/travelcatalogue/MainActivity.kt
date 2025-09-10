@@ -77,8 +77,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         searchBtn.setOnClickListener{
-            // implement search stuff here
-            Toast.makeText(this, "Search bar appears", Toast.LENGTH_SHORT).show()
+            val hotels = vm.hotels.value.orEmpty()
+            val food = vm.food.value.orEmpty()
+            val attractions = vm.attractions.value.orEmpty()
+
+            val allItems = ArrayList(hotels + food + attractions)
+
+            val intentSearch = Intent(this, SearchActivity::class.java).apply{
+                putExtra("allItems", allItems)
+                }
+            startActivity(intentSearch)
         }
     }
 
