@@ -6,11 +6,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 
 class MainActivity : AppCompatActivity() {
 
+    private val vm: CatalogueViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,8 +63,16 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        favouritesListBtn.setOnClickListener{
-            val intentFavourites = Intent(this, FavouritesActivity::class.java)
+        favouritesListBtn.setOnClickListener {
+            val hotels = vm.hotels.value.orEmpty()
+            val food = vm.food.value.orEmpty()
+            val attractions = vm.attractions.value.orEmpty()
+
+            val allItems = ArrayList(hotels + food + attractions)
+
+            val intentFavourites = Intent(this, FavouritesActivity::class.java).apply {
+                putExtra("allItems", allItems)
+            }
             startActivity(intentFavourites)
         }
 

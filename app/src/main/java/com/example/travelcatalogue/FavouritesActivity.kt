@@ -14,11 +14,34 @@ class FavouritesActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_favourites)
 
+        val allItems = intent.getSerializableExtra("allItems") as? ArrayList<CatalogueItem> ?: arrayListOf()
+        val favourites = allItems.filter { it.isFavourite }
+
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerItemsFavourites)
+
+        val adapter = CatalogueAdapter(this) { item ->
+            val intent = Intent(this, DetailedViewActivity::class.java).apply {
+                putExtra("title", item.title)
+                putExtra("location", item.location)
+                putExtra("description", item.description)
+                putExtra("imageResId", item.imageResId)
+                putExtra("isFavourite", item.isFavourite)
+            }
+            startActivity(intent)
+        }
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
         val backBtn = findViewById<ImageButton>(R.id.backBtn)
 
         backBtn.setOnClickListener {
             finish()
         }
+
+        adapter.updateItems(favourites)
+
 
 
 
