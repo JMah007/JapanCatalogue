@@ -8,16 +8,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.travelcatalogue.R
 
 class DetailedViewActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: CatalogueViewModel
+    private lateinit var currentItem: CatalogueItem
     private var isFavourite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detailed_view)
+        viewModel = ViewModelProvider(this)[CatalogueViewModel::class.java]
 
         val title = intent.getStringExtra("title") ?: "No Title"
         val location = intent.getStringExtra("location") ?: "No Location"
@@ -25,6 +29,8 @@ class DetailedViewActivity : AppCompatActivity() {
         val type = intent.getStringExtra("type") ?: "No Type"
         val imageResId = intent.getIntExtra("imageResId", R.drawable.home_image)
         isFavourite = intent.getBooleanExtra("isFavourite", false)
+
+        currentItem = CatalogueItem(title, location, description, type, imageResId, isFavourite)
 
         val titleView = findViewById<TextView>(R.id.title)
         val locationView = findViewById<TextView>(R.id.location)
@@ -37,32 +43,26 @@ class DetailedViewActivity : AppCompatActivity() {
         locationView.text = location
         descriptionView.text = description
         backgroundImage.setImageResource(imageResId)
-        favBtn.setImageResource(
-            if (isFavourite) R.drawable.filled_star else R.drawable.unfilled_star
-        )
+        updateFavBtn(favBtn)
 
         backBtn.setOnClickListener {
             finish()
         }
 
         favBtn.setOnClickListener {
-            if (isFavourite){
-                isFavourite = false
-                favBtn.setImageResource(
-                    R.drawable.unfilled_star
-                )
-                Toast.makeText(this, "Removed from favourites", Toast.LENGTH_SHORT).show()
+            isFavourite = !isFavourite
+            currentItem = currentItem.copy(isFavourite = isFavourite)
+            viewModel.toggleFavorite(currentItem)
+            updateFavBtn(favBtn)
 
-            }
-            else{
-                isFavourite = true
-                Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show()
-                favBtn.setImageResource(
-                    R.drawable.filled_star
-                )
-            }
+            val message = if (isFavourite) "Added to favourites" else "Removed from favourites"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
+    }
 
-
+    private fun updateFavBtn(favBtn: ImageButton?) {
+        favBtn?.setImageResource(
+            if (isFavourite) R.drawable.filled_star else R.drawable.unfilled_star
+        )
     }
 }

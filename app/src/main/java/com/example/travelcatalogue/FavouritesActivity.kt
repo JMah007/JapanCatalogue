@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,8 +18,8 @@ class FavouritesActivity : AppCompatActivity() {
         val allItems = intent.getSerializableExtra("allItems") as? ArrayList<CatalogueItem> ?: arrayListOf()
         val favourites = allItems.filter { it.isFavourite }
 
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerItemsFavourites)
+        val backBtn = findViewById<ImageButton>(R.id.backBtn)
 
         val adapter = CatalogueAdapter(this) { item ->
             val intent = Intent(this, DetailedViewActivity::class.java).apply {
@@ -34,16 +35,10 @@ class FavouritesActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        val backBtn = findViewById<ImageButton>(R.id.backBtn)
-
         backBtn.setOnClickListener {
             finish()
         }
 
         adapter.updateItems(favourites)
-
-
-
-
     }
 }

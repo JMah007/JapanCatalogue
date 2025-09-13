@@ -13,6 +13,8 @@ import androidx.core.os.bundleOf
 class MainActivity : AppCompatActivity() {
 
     private val vm: CatalogueViewModel by viewModels()
+    private var currentAllItems: List<CatalogueItem> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         val foodBtn = findViewById<Button>(R.id.btnFood)
         val attractionsBtn = findViewById<Button>(R.id.btnAttractions)
 
+        vm.hotels.observe(this) { updateCombinedItems() }
+        vm.food.observe(this) { updateCombinedItems() }
+        vm.attractions.observe(this) { updateCombinedItems() }
 
         /*
         * This method helps to initialise a new fragment with a new category list
@@ -64,16 +69,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         favouritesListBtn.setOnClickListener {
-            val hotels = vm.hotels.value.orEmpty()
-            val food = vm.food.value.orEmpty()
-            val attractions = vm.attractions.value.orEmpty()
-
-            val allItems = ArrayList(hotels + food + attractions)
-
-            val intentFavourites = Intent(this, FavouritesActivity::class.java).apply {
-                putExtra("allItems", allItems)
+            val favourites = Intent(this, FavouritesActivity::class.java).apply {
+                putExtra("allItems", ArrayList(currentAllItems))
             }
-            startActivity(intentFavourites)
+            startActivity(favourites)
         }
 
         searchBtn.setOnClickListener{
@@ -90,5 +89,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateCombinedItems(): List<CatalogueItem> {
+        val hotels = vm.hotels.value.orEmpty()
+        val food = vm.food.value.orEmpty()
+        val attractions = vm.attractions.value.orEmpty()
+        currentAllItems = hotels + food + attractions
+        return currentAllItems
+    }
 }
 

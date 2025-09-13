@@ -24,7 +24,6 @@ class CatalogueAdapter(
         val title: TextView = view.findViewById(R.id.title)
         val type: TextView = view.findViewById(R.id.type)
         val description: TextView = view.findViewById(R.id.description)
-       // val type: TextView = view.findViewById(R.id.type)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

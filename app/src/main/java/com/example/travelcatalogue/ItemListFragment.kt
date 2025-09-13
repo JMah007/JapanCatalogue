@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -28,8 +27,6 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerItemsHome)
-        //adapter = CatalogueAdapter(requireContext())
-
 
         adapter = CatalogueAdapter(requireContext()) { item ->
             val intent = Intent(requireContext(), DetailedViewActivity::class.java).apply {
@@ -37,7 +34,7 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
                 putExtra("location", item.location)
                 putExtra("description", item.description)
                 putExtra("imageResId", item.imageResId)
-                putExtra("isFavourite", false)
+                putExtra("isFavourite", item.isFavourite)
             }
             startActivity(intent)
         }

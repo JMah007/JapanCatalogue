@@ -8,5 +8,5 @@ data class CatalogueItem(
     val description: String,
     val type: String,
     val imageResId: Int = R.drawable.home_image,
-    val isFavourite: Boolean
+    var isFavourite: Boolean = false
 ): Serializable
