@@ -1,7 +1,5 @@
 package com.example.travelcatalogue
 
-import java.io.Serializable
-
 data class CatalogueItem(
     val title: String,
     val location: String,
@@ -9,4 +7,4 @@ data class CatalogueItem(
     val type: String,
     val imageResId: Int = R.drawable.home_image,
     var isFavourite: Boolean = false
-): Serializable
+)

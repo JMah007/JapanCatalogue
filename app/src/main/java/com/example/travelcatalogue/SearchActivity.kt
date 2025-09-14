@@ -12,14 +12,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip;
 
 class SearchActivity: AppCompatActivity() {
+    private lateinit var vm: CatalogueViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_search)
 
-        // change this once serialisable is not used as we werent taught as? function
-        val allItems = intent.getSerializableExtra("allItems") as? ArrayList<CatalogueItem> ?: arrayListOf()
+        vm = (application as MyApplication).catalogueViewModel
+
+        val allItems = (vm.hotels.value ?: emptyList()) +
+                (vm.food.value ?: emptyList()) +
+                (vm.attractions.value ?: emptyList())
 
         val searchQuery = findViewById<SearchView>(R.id.searchBar)
         val filterFoodOption = findViewById<Chip>(R.id.chipFood)

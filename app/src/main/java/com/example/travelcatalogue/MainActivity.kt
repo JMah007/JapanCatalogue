@@ -73,22 +73,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         favouritesListBtn.setOnClickListener {
-            val favourites = Intent(this, FavouritesActivity::class.java).apply {
-                putExtra("allItems", ArrayList(currentAllItems))
-            }
+            val favourites = Intent(this, FavouritesActivity::class.java)
             startActivity(favourites)
         }
 
         searchBtn.setOnClickListener{
-            val hotels = vm.hotels.value.orEmpty()
-            val food = vm.food.value.orEmpty()
-            val attractions = vm.attractions.value.orEmpty()
-
-            val allItems = ArrayList(hotels + food + attractions)
-
-            val intentSearch = Intent(this, SearchActivity::class.java).apply{
-                putExtra("allItems", allItems)
-                }
+            val intentSearch = Intent(this, SearchActivity::class.java)
             startActivity(intentSearch)
         }
     }

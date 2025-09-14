@@ -10,13 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class FavouritesActivity : AppCompatActivity() {
+    private lateinit var vm: CatalogueViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_favourites)
 
-        val allItems = intent.getSerializableExtra("allItems") as? ArrayList<CatalogueItem> ?: arrayListOf()
-        val favourites = allItems.filter { it.isFavourite }
+        vm = (application as MyApplication).catalogueViewModel
+
+
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerItemsFavourites)
         val backBtn = findViewById<ImageButton>(R.id.backBtn)
@@ -39,6 +42,19 @@ class FavouritesActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter.updateItems(favourites)
+        fun updateFavouritesList() {
+            val allItems = (vm.hotels.value ?: emptyList()) +
+                    (vm.food.value ?: emptyList()) +
+                    (vm.attractions.value ?: emptyList())
+            val favourites = allItems.filter { it.isFavourite }
+            adapter.updateItems(favourites)
+        }
+
+        vm.hotels.observe(this) { updateFavouritesList() }
+        vm.food.observe(this) { updateFavouritesList() }
+        vm.attractions.observe(this) { updateFavouritesList() }
+
+
+
     }
 }
