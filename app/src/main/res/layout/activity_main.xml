@@ -49,7 +49,6 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/homeImage">
 
-
         <Button
             android:id="@+id/btnHotels"
             android:layout_width="0dp"
