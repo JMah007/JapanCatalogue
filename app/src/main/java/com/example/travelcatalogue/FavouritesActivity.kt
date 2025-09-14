@@ -19,8 +19,6 @@ class FavouritesActivity : AppCompatActivity() {
 
         vm = (application as MyApplication).catalogueViewModel
 
-
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerItemsFavourites)
         val backBtn = findViewById<ImageButton>(R.id.backBtn)
 
