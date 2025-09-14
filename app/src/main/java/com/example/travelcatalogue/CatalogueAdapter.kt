@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
-    private val context: Context,
     private val onItemClick: (CatalogueItem) -> Unit,
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
     private var items: List<CatalogueItem> = emptyList()
 
-
+    // Called everytime list needs to be rerendered due to updated content
     fun updateItems(newItems: List<CatalogueItem>) {
         items = newItems
         notifyDataSetChanged()
@@ -22,9 +21,8 @@ class CatalogueAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)
-        val location: TextView = view.findViewById(R.id.location)
+        val type: TextView = view.findViewById(R.id.type)
         val description: TextView = view.findViewById(R.id.description)
-       // val type: TextView = view.findViewById(R.id.type)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,7 +34,7 @@ class CatalogueAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.title.text = item.title
-        holder.location.text = item.location
+        holder.type.text = item.type
         holder.description.text = item.description
 
         holder.itemView.setOnClickListener {

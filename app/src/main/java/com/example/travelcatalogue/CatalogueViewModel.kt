@@ -1,10 +1,12 @@
 package com.example.travelcatalogue
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CatalogueViewModel : ViewModel() {
+class CatalogueViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _hotels = MutableLiveData<List<CatalogueItem>>(
         listOf(
@@ -20,32 +22,33 @@ class CatalogueViewModel : ViewModel() {
             CatalogueItem("Hotel Futaba", "Niigata", "Surrounded by the natural beauty of the Mount Tanigawa, Hotel Futaba lies on the high plains of the historical Echigo-Yuzawa Onsen hot spring area. It offers comfortable Japanese tatami rooms with private bathing facilities, as well as indoor and outdoor baths with splendid mountain views.", "Hotel", R.drawable.futaba)
         )
     )
+
     private val _food = MutableLiveData<List<CatalogueItem>>(
         listOf(
             CatalogueItem("Omoide Yokocho", "Tokyo", "Also known as Memory Lane, Omoide Yokocho is a historic alley in Shinjuku, Tokyo, famous for its traditional eateries and vibrant atmosphere, offering a taste of post-war Japan.", "Food", R.drawable.omoide),
             CatalogueItem("Yokohama Chinatown", "Kanagawa", "It is the largest chinatown in Japan with rougly 250 chinese-owned or themed shops and restaurants scattered throughout the district, making it the perfect spot for anyone looking to enjoy delicious Japanese-Chinese food.", "Food", R.drawable.chinatown),
             CatalogueItem("Ichiran ramen", "All across Japan", "Originating from Fukuoka prefecture, this ramen franchise has become one of if not the most famous and influential ramen franchise not just in Japan but all across the globe.", "Food", R.drawable.ichiran),
             CatalogueItem("Sushiro", "All across Japan", "Sushiro is a sushi train franchise that is well-known and familiar to locals. It offers a wide range of sushi using only the freshest ingredients from the sea of Japan, making it a must-visit for sushi enthusiasts.", "Food", R.drawable.sushiro),
-            CatalogueItem("HAJIME", "Osaka", "HAJIME is a restaurant that captures the beauty and harmony of nature, Earth, and the universe in its cuisine. It invites you to savor the world of HAJIME and explore the questions of life, love and enjoyment. They have also recently been awarded 3 michelin stars in the Michelin Guide 2025.","Food", R.drawable.hajime),
+            CatalogueItem("HAJIME", "Osaka","HAJIME is a restaurant that captures the beauty and harmony of nature, Earth, and the universe in its cuisine. It invites you to savor the world of HAJIME and explore the questions of life, love and enjoyment. They have also recently been awarded 3 michelin stars in the Michelin Guide 2025.", "Food", R.drawable.hajime),
             CatalogueItem("Jukeihanten Yokohama Chukagai Shinkan", "Yokohama", "Located in the heart of Japan's biggest chinatown, Yokohama, this Chinese restaurant offers a wide range of mouth-watering chinese food that customers can enjoy.", "Food", R.drawable.shinkan),
             CatalogueItem("Okinawa Soba Eibun", "Okinawa", "This local restaurant located in the island of Okinawa offers a dish that is very familiar to the Okinawans, the Okinawa Soba. Truly a one of a kind meal that you can only get in Okinawa.", "Food", R.drawable.eibun),
             CatalogueItem("Kushi Katsu A-bon", "Hyogo", "They offer a dinner course featuring around 20 skewers, with two seatings each night. With meticulous attention to ingredient selection, preparation, and frying techniques, each skewer is crafted to perfection, ensuring a loyal following of repeat customers, perfect for customers who wants to experience kushikatsu.", "Food", R.drawable.kushikatsu),
-            CatalogueItem("Sumiyaki Hitsumabushi Unagi Munagi", "Nagoya", "This restaurant provides the highest quality of Nagoya's most beloved local cuisine, Hitsumabushi, which is a unique rice bowl topped with lots of eel and eaten with tea.", "Hotel", R.drawable.hitsumabushi),
-            CatalogueItem("Saizeriya", "All across Japan", "Saizeriya is the most famous Italian food chain in Japan. It offers cheap but high quality Italian food that anyone can easily enjoy on their own or with families and friends.", "Hotel", R.drawable.saizeriya)
+            CatalogueItem("Sumiyaki Hitsumabushi Unagi Munagi", "Nagoya", "This restaurant provides the highest quality of Nagoya's most beloved local cuisine, Hitsumabushi, which is a unique rice bowl topped with lots of eel and eaten with tea.", "Food", R.drawable.hitsumabushi),
+            CatalogueItem("Saizeriya", "All across Japan", "Saizeriya is the most famous Italian food chain in Japan. It offers cheap but high quality Italian food that anyone can easily enjoy on their own or with families and friends.", "Food", R.drawable.saizeriya)
         )
     )
     private val _attractions = MutableLiveData<List<CatalogueItem>>(
         listOf(
-            CatalogueItem("Okinawa Churaumi Aquarium", "Okinawa", "One of the biggest aquarium in the world home to 780 species of marine lives.", "Attractions", R.drawable.aquarium),
-            CatalogueItem("Mount Fuji", "Yamanashi/Shizuoka", "Japan's tallest mountain and has visible snow on its tip all year long which is an iconic spot for hikinh and artwork inspiration.", "Attractions", R.drawable.fuji),
-            CatalogueItem("Fushimi Inari Shrine", "Kyoto", "A shrine located in the old capital of Japan that is iconic for its thousands of vibrant red Torii gates. Takes around 12,000 steps to reach the top.", "Attractions", R.drawable.inari),
-            CatalogueItem("Shibuya", "Tokyo", "A major commercial center that houses one of the busiest railway station in the world and boasts a population density of 16 thousand people per square kilometer.", "Attractions", R.drawable.shibuya),
-            CatalogueItem("DisneySea Tokyo", "Chiba", "The one and only DisneySea in the world is located right next to Tokyo. It is a place that needs no introduction and provides everyone who enters a once-in-a-lifetime magical experience that will definitely bring them back again.", "Attractions", R.drawable.disney),
-            CatalogueItem("Universal Studio Japan", "Osaka", "Universal Studio Japan is a special place that allows customers to enjoy thrilling rides and games. It offers a wide range of seasonal themed-games based on the trendiest anime.", "Attractions", R.drawable.usj),
-            CatalogueItem("Arashiyama Bamboo Forest", "Kyoto", "Explore one of Kyoto's most iconic sight, the Arashiyama Bamboo Forest is a must-do activity for whoever visiting Kyoto. Walking down the small alley way surrounded by bamboos gives the best experience on nature.", "Attractions", R.drawable.bamboo),
-            CatalogueItem("Nara Deer Park", "Nara", "A historical park that is home to hundreds of semi-wild deer that you can feed and interact with. These deers roam around the park freely to allow unlimited interactions between the deer and the people. Crackers for the deer are sold at a cheap price in the nearby shops for everyone to better interact with the deers.", "Attractions", R.drawable.deer),
-            CatalogueItem("Tokyo Skytree", "Tokyo", "Tokyo Skytree is the third tallest structure in the world, boasting a height of 634 metres tall. Although it started off as a normal broadcasting tower, it is now a very well-known observation deck for both locals and tourists alike. Once you reach the top of the building, you are able to have the best view of the whole of Tokyo at a glance.", "Attractions", R.drawable.skytree),
-            CatalogueItem("Sapporo Snow Festival", "Hokkaido", "The Sapporo Snow Festival is an event that is held every February in Hokkaido's capital city, Sapporo for only a week and it is the most famous winter activity in Japan. The festival features the country's best ice and snow sculptures that is sure to capture the hearts of every person. Truly an event that you cannot miss.", "Attractions", R.drawable.snow)
+            CatalogueItem("Okinawa Churaumi Aquarium", "Okinawa", "One of the biggest aquarium in the world home to 780 species of marine lives.", "Attraction", R.drawable.aquarium),
+            CatalogueItem("Mount Fuji", "Yamanashi/Shizuoka", "Japan's tallest mountain and has visible snow on its tip all year long which is an iconic spot for hikinh and artwork inspiration.", "Attraction", R.drawable.fuji),
+            CatalogueItem("Fushimi Inari Shrine", "Kyoto", "A shrine located in the old capital of Japan that is iconic for its thousands of vibrant red Torii gates. Takes around 12,000 steps to reach the top.", "Attraction", R.drawable.inari),
+            CatalogueItem("Shibuya", "Tokyo", "A major commercial center that houses one of the busiest railway station in the world and boasts a population density of 16 thousand people per square kilometer.", "Attraction", R.drawable.shibuya),
+            CatalogueItem("DisneySea Tokyo", "Chiba", "The one and only DisneySea in the world is located right next to Tokyo. It is a place that needs no introduction and provides everyone who enters a once-in-a-lifetime magical experience that will definitely bring them back again.", "Attraction", R.drawable.disney),
+            CatalogueItem("Universal Studio Japan", "Osaka", "Universal Studio Japan is a special place that allows customers to enjoy thrilling rides and games. It offers a wide range of seasonal themed-games based on the trendiest anime.", "Attraction", R.drawable.usj),
+            CatalogueItem("Arashiyama Bamboo Forest", "Kyoto", "Explore one of Kyoto's most iconic sight, the Arashiyama Bamboo Forest is a must-do activity for whoever visiting Kyoto. Walking down the small alley way surrounded by bamboos gives the best experience on nature.", "Attraction", R.drawable.bamboo),
+            CatalogueItem("Nara Deer Park", "Nara", "A historical park that is home to hundreds of semi-wild deer that you can feed and interact with. These deers roam around the park freely to allow unlimited interactions between the deer and the people. Crackers for the deer are sold at a cheap price in the nearby shops for everyone to better interact with the deers.", "Attraction", R.drawable.deer),
+            CatalogueItem("Tokyo Skytree", "Tokyo", "Tokyo Skytree is the third tallest structure in the world, boasting a height of 634 metres tall. Although it started off as a normal broadcasting tower, it is now a very well-known observation deck for both locals and tourists alike. Once you reach the top of the building, you are able to have the best view of the whole of Tokyo at a glance.", "Attraction", R.drawable.skytree),
+            CatalogueItem("Sapporo Snow Festival", "Hokkaido", "The Sapporo Snow Festival is an event that is held every February in Hokkaido's capital city, Sapporo for only a week and it is the most famous winter activity in Japan. The festival features the country's best ice and snow sculptures that is sure to capture the hearts of every person. Truly an event that you cannot miss.", "Attraction", R.drawable.snow)
         )
     )
 
@@ -53,4 +56,29 @@ class CatalogueViewModel : ViewModel() {
     val food: LiveData<List<CatalogueItem>> = _food
     val attractions: LiveData<List<CatalogueItem>> = _attractions
 
+    fun toggleFavorite(item: CatalogueItem) {
+        _hotels.value = _hotels.value?.map {
+            if (it.title == item.title) {
+                it.copy(isFavourite = !it.isFavourite)
+            } else {
+                it
+            }
+        }
+
+        _food.value = _food.value?.map {
+            if (it.title == item.title) {
+                it.copy(isFavourite = !it.isFavourite)
+            } else {
+                it
+            }
+        }
+
+        _attractions.value = _attractions.value?.map {
+            if (it.title == item.title) {
+                it.copy(isFavourite = !it.isFavourite)
+            } else {
+                it
+            }
+        }
+    }
 }
