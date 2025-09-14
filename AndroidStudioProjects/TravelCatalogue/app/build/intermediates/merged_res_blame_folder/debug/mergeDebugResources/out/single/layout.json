@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/item_catalogue.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/item_catalogue.xml"
+    },
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/activity_favourites.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/activity_favourites.xml"
+    },
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/activity_catalogue.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/activity_catalogue.xml"
+    },
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/activity_main.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/item_list_fragment.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/item_list_fragment.xml"
+    },
+    {
+        "merged": "com.example.travelcatalogue.app-mergeDebugResources-48:/layout/activity_detailed_view.xml",
+        "source": "com.example.travelcatalogue.app-main-51:/layout/activity_detailed_view.xml"
+    }
+]

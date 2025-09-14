@@ -9,15 +9,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    private val vm: CatalogueViewModel by viewModels()
+    private lateinit var vm: CatalogueViewModel
     private var currentAllItems: List<CatalogueItem> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        vm = (application as MyApplication).catalogueViewModel
+
 
         val favouritesListBtn = findViewById<ImageButton>(R.id.FavouritesListBtn)
         val searchBtn = findViewById<ImageButton>(R.id.SearchBtn)
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        //Beginning of the program setting Hotels as the default list to show
+        //Beginning of the program sets Hotels as the default list to show
         if (savedInstanceState == null){
             val fragment = ItemListFragment()
             val bundle = Bundle()

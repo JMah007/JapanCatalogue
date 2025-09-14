@@ -21,14 +21,22 @@ class DetailedViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detailed_view)
-        viewModel = ViewModelProvider(this)[CatalogueViewModel::class.java]
+
+
+        viewModel = (application as MyApplication).catalogueViewModel
+
 
         val title = intent.getStringExtra("title") ?: "No Title"
         val location = intent.getStringExtra("location") ?: "No Location"
         val description = intent.getStringExtra("description") ?: "No Description"
         val type = intent.getStringExtra("type") ?: "No Type"
         val imageResId = intent.getIntExtra("imageResId", R.drawable.home_image)
-        isFavourite = intent.getBooleanExtra("isFavourite", false)
+        isFavourite = (viewModel.hotels.value
+            ?.find { it.title == title }
+            ?: viewModel.food.value?.find { it.title == title }
+            ?: viewModel.attractions.value?.find { it.title == title }
+                )?.isFavourite ?: false
+
 
         currentItem = CatalogueItem(title, location, description, type, imageResId, isFavourite)
 

@@ -1,10 +1,12 @@
 package com.example.travelcatalogue
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CatalogueViewModel : ViewModel() {
+class CatalogueViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _hotels = MutableLiveData<List<CatalogueItem>>(
         listOf(
