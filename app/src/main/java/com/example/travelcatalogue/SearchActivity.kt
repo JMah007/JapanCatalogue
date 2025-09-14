@@ -21,10 +21,12 @@ class SearchActivity: AppCompatActivity() {
 
         vm = (application as MyApplication).catalogueViewModel
 
+        // Combine all the lists into one list that can be displayed with all categories together
         val allItems = (vm.hotels.value ?: emptyList()) +
                 (vm.food.value ?: emptyList()) +
                 (vm.attractions.value ?: emptyList())
 
+        // Initialises content to be displayed
         val searchQuery = findViewById<SearchView>(R.id.searchBar)
         val filterFoodOption = findViewById<Chip>(R.id.chipFood)
         val filterHotelsOption = findViewById<Chip>(R.id.chipHotels)
@@ -36,7 +38,7 @@ class SearchActivity: AppCompatActivity() {
 
 
         // Handles selection of item and starts activity for detailed view
-        val adapter = CatalogueAdapter(this) { item ->
+        val adapter = CatalogueAdapter{ item ->
             val intent = Intent(this, DetailedViewActivity::class.java).apply {
                 putExtra("title", item.title)
                 putExtra("location", item.location)
@@ -46,11 +48,12 @@ class SearchActivity: AppCompatActivity() {
             }
             startActivity(intent)
         }
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-
+        /*
+        * This function only adds items to a list that match the search requirements
+         */
         fun applyFilters() {
             val filteredList = allItems.filter { item ->
                 // Match searchQuery. If its empty then passes as true as we want all items to be shown if no search query is given
@@ -69,39 +72,39 @@ class SearchActivity: AppCompatActivity() {
                 // Return true if search and chip filter both pass
                 matchesSearch && matchesChip
             }
-
             adapter.updateItems(filteredList)
         }
 
 
         // Handles change in searchQuery typed in
         searchQuery.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            // Don't implement this as we don't use submit button as we want live updates
+            // We don't implement this as we don't use submit button as we want live updates
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 currentSearchText = newText
-                applyFilters()  // update the list
+                applyFilters()
                 return true
             }
         })
 
-        // These are for if theres no search query so applyFilters need to be watched by onCheckedListeners
-        filterFoodOption.setOnCheckedChangeListener { chip, isChecked ->
+
+        // These are for instances where theres no change to the searchQuery so handles change in checked status of filters
+        filterFoodOption.setOnCheckedChangeListener { _, _ ->
             applyFilters()
 
         }
 
-        // These are for if theres no search query so applyFilters need to be watched by onCheckedListeners
-        filterHotelsOption.setOnCheckedChangeListener { chip, isChecked ->
-            applyFilters()  // update the list whenever chip is ticked/unticked
+        // These are for instances where theres no change to the searchQuery so handles change in checked status of filters
+        filterHotelsOption.setOnCheckedChangeListener { _, _ ->
+            applyFilters()
         }
 
-        // These are for if theres no search query so applyFilters need to be watched by onCheckedListeners
-        filterAttractionsOption.setOnCheckedChangeListener { chip, isChecked ->
-            applyFilters()  // update the list whenever chip is ticked/unticked
+        // These are for instances where theres no change to the searchQuery so handles change in checked status of filters
+        filterAttractionsOption.setOnCheckedChangeListener { _, _ ->
+            applyFilters()
         }
 
 

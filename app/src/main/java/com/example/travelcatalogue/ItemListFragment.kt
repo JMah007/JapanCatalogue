@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemListFragment : Fragment(R.layout.item_list_fragment) {
-
     private val vm: CatalogueViewModel by activityViewModels()
     private lateinit var adapter: CatalogueAdapter
-
     private lateinit var category: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +26,7 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerItemsHome)
 
-        adapter = CatalogueAdapter(requireContext()) { item ->
+        adapter = CatalogueAdapter{ item ->
             val intent = Intent(requireContext(), DetailedViewActivity::class.java).apply {
                 putExtra("title", item.title)
                 putExtra("location", item.location)
@@ -38,17 +36,15 @@ class ItemListFragment : Fragment(R.layout.item_list_fragment) {
             }
             startActivity(intent)
         }
-
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-
+        // Selects list the user chooses to view
         when (category) {
             "Hotels" -> vm.hotels.observe(viewLifecycleOwner) {adapter.updateItems(it) }
             "Food" -> vm.food.observe(viewLifecycleOwner) {adapter.updateItems(it) }
             "Attractions" -> vm.attractions.observe(viewLifecycleOwner) {adapter.updateItems(it) }
         }
-
     }
 }
 

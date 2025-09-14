@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CatalogueAdapter(
-    private val context: Context,
     private val onItemClick: (CatalogueItem) -> Unit,
 ) : RecyclerView.Adapter<CatalogueAdapter.ViewHolder>() {
 
     private var items: List<CatalogueItem> = emptyList()
 
-
+    // Called everytime list needs to be rerendered due to updated content
     fun updateItems(newItems: List<CatalogueItem>) {
         items = newItems
         notifyDataSetChanged()

@@ -20,11 +20,11 @@ class FavouritesActivity : AppCompatActivity() {
         vm = (application as MyApplication).catalogueViewModel
 
 
-
+        // Initialises content to be displayed
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerItemsFavourites)
         val backBtn = findViewById<ImageButton>(R.id.backBtn)
 
-        val adapter = CatalogueAdapter(this) { item ->
+        val adapter = CatalogueAdapter{ item ->
             val intent = Intent(this, DetailedViewActivity::class.java).apply {
                 putExtra("title", item.title)
                 putExtra("location", item.location)
@@ -34,9 +34,9 @@ class FavouritesActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
 
         backBtn.setOnClickListener {
             finish()
@@ -46,15 +46,14 @@ class FavouritesActivity : AppCompatActivity() {
             val allItems = (vm.hotels.value ?: emptyList()) +
                     (vm.food.value ?: emptyList()) +
                     (vm.attractions.value ?: emptyList())
-            val favourites = allItems.filter { it.isFavourite }
+            val favourites = allItems.filter {it.isFavourite}
             adapter.updateItems(favourites)
         }
 
+
+        // Observes if any items are deleted or added to the favourites list
         vm.hotels.observe(this) { updateFavouritesList() }
         vm.food.observe(this) { updateFavouritesList() }
         vm.attractions.observe(this) { updateFavouritesList() }
-
-
-
     }
 }

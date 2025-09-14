@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.travelcatalogue.R
 
 class DetailedViewActivity : AppCompatActivity() {
-
     private lateinit var viewModel: CatalogueViewModel
     private lateinit var currentItem: CatalogueItem
     private var isFavourite = false
@@ -22,10 +21,9 @@ class DetailedViewActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_detailed_view)
 
-
         viewModel = (application as MyApplication).catalogueViewModel
 
-
+        // This segment retrieves the items content so it can be displayed and copied
         val title = intent.getStringExtra("title") ?: "No Title"
         val location = intent.getStringExtra("location") ?: "No Location"
         val description = intent.getStringExtra("description") ?: "No Description"
@@ -38,8 +36,7 @@ class DetailedViewActivity : AppCompatActivity() {
                 )?.isFavourite ?: false
 
 
-        currentItem = CatalogueItem(title, location, description, type, imageResId, isFavourite)
-
+        // Initialises content to be displayed
         val titleView = findViewById<TextView>(R.id.title)
         val locationView = findViewById<TextView>(R.id.location)
         val descriptionView = findViewById<TextView>(R.id.description)
@@ -53,11 +50,13 @@ class DetailedViewActivity : AppCompatActivity() {
         backgroundImage.setImageResource(imageResId)
         updateFavBtn(favBtn)
 
+
         backBtn.setOnClickListener {
             finish()
         }
 
         favBtn.setOnClickListener {
+            currentItem = CatalogueItem(title, location, description, type, imageResId, isFavourite)
             isFavourite = !isFavourite
             currentItem = currentItem.copy(isFavourite = isFavourite)
             viewModel.toggleFavorite(currentItem)
@@ -68,6 +67,9 @@ class DetailedViewActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    * This handles changing the appearance of the favourites button when interacted with
+     */
     private fun updateFavBtn(favBtn: ImageButton?) {
         favBtn?.setImageResource(
             if (isFavourite) R.drawable.filled_star else R.drawable.unfilled_star

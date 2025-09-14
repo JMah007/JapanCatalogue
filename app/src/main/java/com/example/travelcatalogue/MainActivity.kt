@@ -12,7 +12,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var vm: CatalogueViewModel
     private var currentAllItems: List<CatalogueItem> = emptyList()
 
@@ -22,32 +21,15 @@ class MainActivity : AppCompatActivity() {
 
         vm = (application as MyApplication).catalogueViewModel
 
-
+        // Initialises content to be displayed
         val favouritesListBtn = findViewById<ImageButton>(R.id.FavouritesListBtn)
         val searchBtn = findViewById<ImageButton>(R.id.SearchBtn)
         val hotelsBtn = findViewById<Button>(R.id.btnHotels)
         val foodBtn = findViewById<Button>(R.id.btnFood)
         val attractionsBtn = findViewById<Button>(R.id.btnAttractions)
 
-        vm.hotels.observe(this) { updateCombinedItems() }
-        vm.food.observe(this) { updateCombinedItems() }
-        vm.attractions.observe(this) { updateCombinedItems() }
 
-        /*
-        * This method helps to initialise a new fragment with a new category list
-         */
-        fun replaceFragment(category: String) {
-            val fragment = ItemListFragment()
-            val bundle = Bundle()
-            bundle.putString("category", category)
-            fragment.arguments = bundle
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit()
-        }
-
-        //Beginning of the program sets Hotels as the default list to show
+        // Hotels is the default list to show when the app first starts
         if (savedInstanceState == null){
             val fragment = ItemListFragment()
             val bundle = Bundle()
@@ -83,12 +65,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateCombinedItems(): List<CatalogueItem> {
-        val hotels = vm.hotels.value.orEmpty()
-        val food = vm.food.value.orEmpty()
-        val attractions = vm.attractions.value.orEmpty()
-        currentAllItems = hotels + food + attractions
-        return currentAllItems
+
+    /*
+     * This method replaces the fragment with one of the 3 lists the user selects
+     */
+    private fun replaceFragment(category: String) {
+        val fragment = ItemListFragment()
+        val bundle = Bundle()
+        bundle.putString("category", category)
+        fragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
 
